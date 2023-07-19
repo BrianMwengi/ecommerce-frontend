@@ -1,8 +1,11 @@
 <template>
+  <!-- Form for login -->
   <div class="form-container">
     <form @submit.prevent="login" class="login-form">
+      <!-- Email and password inputs -->
       <input type="email" v-model="email" placeholder="Email" required />
       <input type="password" v-model="password" placeholder="Password" required />
+      <!-- Submit button -->
       <button type="submit">Login</button>
     </form>
   </div>
@@ -10,38 +13,42 @@
 
 <script>
 import axios from '@/axios'; 
+
 export default {
   data() {
     return {
+      // Data model for the form inputs
       email: "",
       password: ""
     };
   },
   methods: {
     async login() {
-  try {
-    const response = await axios.post("/login", {
-      email: this.email,
-      password: this.password
-    });
-    
-    // Store the token in local storage
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
-      
-      // Commit a mutation to change the isLoggedIn state
-      this.$store.commit('LOGIN');
+      try {
+        // Making POST request to "/login" endpoint with email and password as data
+        const response = await axios.post("/login", {
+          email: this.email,
+          password: this.password
+        });
 
-      // Redirect to dashboard or another page
-      this.$router.push('/');
+        // If a token is received, it's stored in local storage and the user is considered logged in
+        if (response.data.token) {
+          localStorage.setItem('token', response.data.token);
+
+          // Committing a mutation to update 'isLoggedIn' state
+          this.$store.commit('LOGIN');
+
+          // Redirecting to the home page
+          this.$router.push('/');
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
     }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-   }
   }
 };
 </script>
+
 
 <style scoped>
 .form-container {

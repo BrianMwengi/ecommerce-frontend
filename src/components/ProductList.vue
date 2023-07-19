@@ -1,19 +1,25 @@
 <template>
+  <!-- Product list container -->
   <div class="product-list">
       <ul>
+          <!-- Product list item -->
+          <!-- Use Vue's 'v-for' directive to loop through the products array -->
           <li class="product-item" v-for="product in products" :key="product.id">
-              <!-- Product Name -->
+              <!-- Display the product name -->
               <span class="product-name">{{ product.name }}</span>
 
-              <!-- Actions Container -->
+              <!-- Container for action links -->
               <div class="action-links">
-                  <!-- Link to Edit -->
+                  <!-- Link to edit the product -->
+                  <!-- Use Vue Router's 'router-link' component to create a navigation link -->
+                  <!-- Use Vue's 'v-bind' directive (shorthand ':') to bind the 'to' prop with route data -->
                   <router-link class="edit-link" :to="{ name: 'EditProduct', params: { id: product.id } }">Edit</router-link>
 
-                  <!-- Link to Details -->
+                  <!-- Link to view product details -->
                   <router-link class="details-link" :to="{ name: 'ProductDetails', params: { id: product.id } }">View Details</router-link>
 
-                  <!-- Delete Button -->
+                  <!-- Button to delete the product -->
+                  <!-- Use Vue's 'v-on' directive (shorthand '@') to bind the click event with the 'deleteProduct' method -->
                   <button class="delete-button" @click="deleteProduct(product.id)">Delete</button>
               </div>
           </li>
@@ -21,41 +27,47 @@
   </div>
 </template>
 
-
-
 <script>
-import axios from '@/axios'; 
+import axios from '@/axios';  // Import the axios instance
 
 export default {
+  // Component data
   data() {
     return {
-      products: [] // this should be populated with your products from your API
+      // Initialize products as an empty array
+      products: []
     };
   },
   methods: {
+    // Method to delete a product
     async deleteProduct(id) {
       try {
-        // Call the API to delete the product
+        // Make a DELETE request to the API
         await axios.delete(`/products/${id}`);
         
-        // After successful deletion, filter out the deleted product from the products array
+        // If the request is successful, filter the deleted product out of the products array
         this.products = this.products.filter(product => product.id !== id);
       } catch (error) {
+        // If an error occurs, log it to the console
         console.error("An error occurred while deleting the product:", error);
       }
     }
   },
+  // Lifecycle hook that is called after the instance has been created
   async created() {
     try {
-      // Fetch products from the API when the component is created
-      const response = await axios.get('/products');
+      // When the component is created, fetch the products from the API
+      const response = await axios.get('http://localhost:8000/api/products');
+      // Update the products array with the data from the API
       this.products = response.data;
     } catch (error) {
+      // If an error occurs, log it to the console
       console.error("An error occurred while fetching the products:", error);
     }
   }
 }
 </script>
+
 
 
 <style scoped>

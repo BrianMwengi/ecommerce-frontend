@@ -1,45 +1,52 @@
 <template>
+  <!-- Form for registration -->
   <div class="form-container">
     <form @submit.prevent="register" class="register-form">
+      <!-- Name, email, and password inputs -->
       <input type="text" v-model="name" placeholder="Name" required />
       <input type="email" v-model="email" placeholder="Email" required />
       <input type="password" v-model="password" placeholder="Password" required />
+      <!-- Submit button -->
       <button type="submit">Register</button>
     </form>
   </div>
 </template>
-  
-  <script>
-  import axios from '@/axios';
 
-  export default {
-    data() {
-      return {
-        name: "",
-        email: "",
-        password: ""
-      };
-    },
-    methods: {
-      async register() {
-        try {
-           const response = await axios.post("/register", {
-            name: this.name,
-            email: this.email,
-            password: this.password
-          });
-          // Handle the response (e.g., store the token, redirect to dashboard)
-        } 
-        catch (error) {
-          console.error("An error occurred:", error);
-          if (error.response) {
-            console.error('Error details:', error.response.data);
-          }
+<script>
+import axios from '@/axios';
+
+export default {
+  data() {
+    return {
+      // Data model for the form inputs
+      name: "",
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    async register() {
+      try {
+        // Making POST request to "/register" endpoint with name, email, and password as data
+        const response = await axios.post("/register", {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        });
+        // Here you could handle the response, for example, store the received token,
+        // update the 'isLoggedIn' state, and redirect to the dashboard or any other page
+      } 
+      catch (error) {
+        console.error("An error occurred:", error);
+        if (error.response) {
+          console.error('Error details:', error.response.data);
         }
-         }
-        }
-      };
-  </script>
+      }
+    }
+  }
+};
+</script>
+
 
 <style scoped>
 .form-container {
