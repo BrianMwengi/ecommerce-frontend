@@ -1,47 +1,55 @@
 <template>
-  <!-- Form for login -->
+  <!-- Container for the login form -->
   <div class="form-container">
+    <!-- Define the form for user login -->
+    <!--When the form is submitted, it triggers the login method, but the .prevent modifier ensures 
+    the default browser behavior (i.e., page refresh) of form submission is prevented. -->
     <form @submit.prevent="login" class="login-form">
-      <!-- Email and password inputs -->
+      <!-- Input field for the user's email address -->
       <input type="email" v-model="email" placeholder="Email" required />
+      <!-- Input field for the user's password -->
       <input type="password" v-model="password" placeholder="Password" required />
-      <!-- Submit button -->
+      <!-- Login button to submit the form -->
       <button type="submit">Login</button>
     </form>
   </div>
 </template>
 
 <script>
+// Import axios instance for HTTP requests
 import axios from '@/axios'; 
 
 export default {
   data() {
     return {
-      // Data model for the form inputs
+      // Initialize form input data
       email: "",
       password: ""
     };
   },
   methods: {
+    // Asynchronous method to handle the login process
     async login() {
       try {
-        // Making POST request to "/login" endpoint with email and password as data
+        // Send user credentials to the server for validation
         const response = await axios.post("/login", {
           email: this.email,
           password: this.password
         });
 
-        // If a token is received, it's stored in local storage and the user is considered logged in
+        // Check for the authentication token in the server response
         if (response.data.token) {
+          // Store the token in local storage for session management
           localStorage.setItem('token', response.data.token);
 
-          // Committing a mutation to update 'isLoggedIn' state
+          // Update the store's state to reflect user's logged-in status
           this.$store.commit('LOGIN');
 
-          // Redirecting to the home page
+          // Navigate to the home page after successful login
           this.$router.push('/');
         }
       } catch (error) {
+        // Log any errors encountered during the login process
         console.error("An error occurred:", error);
       }
     }
@@ -49,14 +57,15 @@ export default {
 };
 </script>
 
-
 <style scoped>
+/* Styling for the outer form container */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Styling for the login form layout and appearance */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -67,6 +76,7 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Shared styling for input fields and login button inside the form */
 .login-form input, .login-form button {
   padding: 10px;
   border-radius: 5px;
@@ -74,6 +84,7 @@ export default {
   font-size: 16px;
 }
 
+/* Specific styling for the login button */
 .login-form button {
   background-color: #007BFF;
   color: white;

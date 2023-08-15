@@ -25,6 +25,8 @@ export default {
     };
   },
   methods: {
+    // async keyword allows the use of the await keyword inside the method, 
+    // which can pause the function's execution until the promise settles.
     async register() {
       try {
         // Making POST request to "/register" endpoint with name, email, and password as data
