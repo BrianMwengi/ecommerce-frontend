@@ -1,7 +1,7 @@
 <template>
   <!-- Importing and using Navbar component -->
   <Navbar />
-  <div id="app">
+  <div id="app"> <!--just like you'd place your toys on that mat to play, Vue sets up and displays its components inside this <div>--> 
     <!-- Insertion point for views based on the current route -->
     <!-- When navigating to different URLs, different content will be displayed here -->
     <router-view/>
