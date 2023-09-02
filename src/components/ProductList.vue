@@ -15,7 +15,8 @@
                     <!-- Link to edit the product -->
                     <!-- Use Vue Router's 'router-link' component to create a navigation link -->
                     <!-- Use Vue's 'v-bind' directive (shorthand ':') to bind the 'to' prop with route data -->
-                    <!-- <router-link class="edit-link" :to="{ name: 'EditProduct', params: { id: product.id } }">Edit</router-link> -->
+                    <router-link class="edit-link" :to="{ name: 'EditProduct', params: { id: product.id } }">Edit</router-link>
+  
   
                     <!-- Link to view product details -->
                     <!-- <router-link class="details-link" :to="{ name: 'ProductDetails', params: { id: product.id } }">View Details</router-link> -->

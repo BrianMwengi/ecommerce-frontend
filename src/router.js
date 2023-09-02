@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import ProductList from './components/ProductList.vue';
 // import ProductDetails from './components/ProductDetails.vue';
 import AddProduct from './components/AddProduct.vue';
-// import EditProduct from './components/EditProduct.vue';
+import EditProduct from './components/EditProduct.vue';
 import Login from './components/Login.vue'; // Import the Login component
 import Register from './components/Register.vue'; // Import the Register component
 
@@ -26,12 +26,12 @@ const routes = [
         component: AddProduct, // actual room behind the door.
         meta: { public: false } // Mark this route as private (special sticker on some rooms that says "Private")
     },
-    // {
-    //     path: '/edit-product/:id', 
-    //     name: 'EditProduct',
-    //     component: EditProduct,
-    //     meta: { public: false } // Mark this route as private
-    // },
+    {
+        path: '/edit-product/:id', 
+        name: 'EditProduct',
+        component: EditProduct,
+        meta: { public: false } // Mark this route as private
+    },
     {
         path: '/login', // Add this route
         name: 'Login',

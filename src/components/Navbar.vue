@@ -2,7 +2,6 @@
   <!-- Navigation bar// its like a map of your house. It shows where each room is -->
   <nav>
     <!-- Links for different routes. They are conditionally rendered based on the 'isLoggedIn' state. -->
-    <!-- <router-link to="/" v-if="isLoggedIn">Product List</router-link> |-->
     <router-link to="/add-product" v-if="isLoggedIn">Add Product</router-link> | <!--its like a shortcut or a quick link to a room. -->
     <router-link to="/" v-if="isLoggedIn">Product List</router-link> | <!--its like a shortcut or a quick link to a room. -->
     <router-link to="/login" v-if="!isLoggedIn">Login</router-link> |
