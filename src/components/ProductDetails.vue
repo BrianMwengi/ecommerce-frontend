@@ -25,7 +25,8 @@
       };
     },
     // Lifecycle hook that is called after the instance has been mounted
-    async mounted() {
+    async mounted() { // the component being ready and visible in the browser for the first time.then 
+        // we immediately fetch and display the product details.(after that component can update and re-render as many times as needed based on data changes or other interactions.)
       // Get the product ID from the route params
       const productId = this.$route.params.id; // This is like a magic number that tells us which toy car we want. Maybe it's toy car number 5 or number 10
       try {
