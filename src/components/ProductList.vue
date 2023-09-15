@@ -19,7 +19,7 @@
   
   
                     <!-- Link to view product details -->
-                    <!-- <router-link class="details-link" :to="{ name: 'ProductDetails', params: { id: product.id } }">View Details</router-link> -->
+                    <router-link class="details-link" :to="{ name: 'ProductDetails', params: { id: product.id } }">View Details</router-link>
   
                     <!-- Button to delete the product -->
                     <!-- Use Vue's 'v-on' directive (shorthand '@') to bind the click event with the 'deleteProduct' method -->

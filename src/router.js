@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import ProductList from './components/ProductList.vue';
-// import ProductDetails from './components/ProductDetails.vue';
+import ProductDetails from './components/ProductDetails.vue';
 import AddProduct from './components/AddProduct.vue';
 import EditProduct from './components/EditProduct.vue';
 import Login from './components/Login.vue'; // Import the Login component
@@ -14,12 +14,12 @@ const routes = [
         component: ProductList,
         meta: { public: false } // Mark this route as private
     },
-    // {
-    //     path: '/product/:id',
-    //     name: 'ProductDetails',
-    //     component: ProductDetails,
-    //     meta: { public: false } // Mark this route as private
-    // },
+    {
+        path: '/product/:id',
+        name: 'ProductDetails',
+        component: ProductDetails,
+        meta: { public: false } // Mark this route as private
+    },
      {
         path: '/add-product', // namplate on the door
         name: 'AddProduct', // nickname for the room e.g playroom!
